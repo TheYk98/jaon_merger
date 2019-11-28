@@ -21,8 +21,8 @@ class json_merger:
                             # check if the json is a array 
                             if isinstance(data[itr_key],list):
                                 #append each item to the json    
-                                for inner_object in data[itr_key]:
-                                        result[itr_key].append(inner_object)
+                                
+                                result[itr_key].extend(data[itr_key])
                             # if the key initially had only one value and in the second json it has another value,merge them as a list
                             elif isinstance(data[itr_key],str):
                                 result[itr_key]=[(result[itr_key])]
