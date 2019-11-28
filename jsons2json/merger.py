@@ -1,9 +1,11 @@
-import glob,json
+import glob,json,os
 class json_merger:
-    def merger(self):
+    def merger(path,base_name):
         result = {}
-        for f in glob.glob("*.json"):
+        for f in glob.glob(path+"/"+base_name+"*.json"):
+            
             with open(f, "r") as infile:
+                
                 data=(json.loads(infile.read()))
                 key=list(data.keys())
                 
@@ -25,20 +27,15 @@ class json_merger:
                             elif isinstance(data[itr_key],str):
                                 result[itr_key]=[(result[itr_key])]
                                 result[itr_key].append(data[itr_key])
-                                print(result[itr_key])
+                               # print(result[itr_key])
                                 
                             #else, directly merge to the key
                             else:
                                 result[itr_key].append(data[itr_key])
                         else:
                             result[itr_key]=data[itr_key]
-                            
-        with open('Merger.json', 'w') as outfile:
-            json.dump(result, outfile)
-
-test=json_merger()
-test.merger()
-
+        
+        return result
 
 
 
